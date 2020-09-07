@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+
+<body class="overflow-hidden">
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+  <svg class="hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="icon-glas">
+      <g transform="matrix(0.677789,0,0,1,16.1106,0)">
+        <path
+          d="M15.756,18.951L23.81,80.723C23.81,86.933 36.39,91.975 51.885,91.975C67.379,91.975 79.959,86.933 79.959,80.723L84.244,18.951"
+          style="fill:none;stroke-width:4.88px;" class="stroke-current" />
+      </g>
+      <g transform="matrix(0.677789,0,0,1,9.77203,-6.43564)">
+        <ellipse cx="59.352" cy="25.386" rx="34.244" ry="11.251" style="fill:none;stroke-width:4.88px;"
+          class="stroke-current" />
+      </g>
+    </g>
+    <g id="icon-drop" transform="scale(0.01)">
+      <path d="M316.099,85.846c-24.586-35.32-45.821-65.827-50.974-80.433c-1.139-3.215-4.145-5.372-7.554-5.414
+        c-3.15,0.096-6.476,2.044-7.68,5.227c-5.244,13.812-25.405,42.765-48.752,76.314C147.671,158.326,74.447,263.494,74.447,331.917
+        c0,100.926,82.103,183.034,183.029,183.034s183.029-82.108,183.029-183.034C440.505,264.6,368.599,161.285,316.099,85.846z"/>
+    </g>
+  </svg>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
