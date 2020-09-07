@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="px-4 pb-4 space-y-2 animated absolute w-screen bg-black"
+    class="px-4 pb-4 space-y-2 animated top-0 absolute w-screen bg-black"
     :class="{ overlay: overlay }"
   >
     <section class="space-y-2 h-32 visible-footer">
@@ -99,7 +99,8 @@ export default defineComponent({
 </script>
 <style scoped>
 footer {
-  transform: translate(0, calc((100vh - 8rem)));
+  will-change: transform;
+  transform: translate(0, calc(100vh - 8rem));
   height: 66vh;
   transition: transform 0.3s ease-in;
 }
