@@ -35,7 +35,7 @@
       </div>
     </section>
     <section>
-      <div class="grid grid-cols-4 gap-4">
+      <div class="grid grid-cols-4 gap-y-4 gap-x-4">
         <draggable-tile
           v-for="a in values"
           :key="a"
