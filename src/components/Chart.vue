@@ -56,9 +56,9 @@
 </template>
 <script lang="ts">
 import { scaleLinear } from "d3-scale";
-import { line, curveCardinal, curveMonotoneX } from "d3-shape";
-import { computed, PropType, defineComponent, watch } from "vue";
-import { Point, svgPath, lineCommand, bezierCommand } from "@/utils/line";
+import { line, curveMonotoneX } from "d3-shape";
+import { computed, PropType, defineComponent } from "vue";
+import { Point } from "@/utils/line";
 
 export default defineComponent({
   props: {

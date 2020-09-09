@@ -95,7 +95,7 @@
 import Chart from "@/components/Chart.vue";
 import DateChanger from "@/components/DateChanger.vue";
 import { DrinkDataEntry } from "@/db";
-import { getHours, getTime, setHours, setMinutes } from "date-fns";
+import { getHours, getMinutes, getTime, setHours, setMinutes } from "date-fns";
 import { defineComponent, computed, ref } from "vue";
 import { intlDate } from "@/utils/intl-date";
 import { isHtmlInputElement } from "@/utils/events";
@@ -144,7 +144,7 @@ export default defineComponent({
       return [
         { x: 0, y: 0 },
         ...store.drankAccumulated.value.map(({ amountAccumulated, date }) => ({
-          x: getHours(date),
+          x: getHours(date) + getMinutes(date) / 60,
           y: amountAccumulated,
         })),
         { x: 160, y: store.drankToday.value },
