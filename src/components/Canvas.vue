@@ -4,18 +4,20 @@
   >
     <div class="px-4 hidden">
       <div class="flex flex-col">
-        <span class="text-6xl">
-          {{ store.drankToday }}
+        <span class="text-xl hidden">
+          {{ store.date }}
           <span class="text-opacity-50 text-blue-200">l</span>
         </span>
         <span class="text-opacity-25 text-blue-200">Getrunken</span>
       </div>
     </div>
     <div class="px-4 flex overflow-hidden justify-end"></div>
-    <div class="flex-1 flex overflow-hidden">
-      <transition name="view-button-fade" mode="out-in">
+    <div
+      class="flex-1 md:flex container mx-auto md:space-x-4 md:flex-row md:overflow-hidden overflow-auto overscroll-auto data-canvas"
+    >
+      <!-- <transition name="view-button-fade" mode="out-in"> -->
+      <div class="h-full w-full md:w-auto md:flex-1 rounded-lg overflow-hidden">
         <div
-          v-if="store.state.currentView === 'chart'"
           key="chart"
           style="padding-top: 56.25%"
           class="w-full self-center container mx-auto relative"
@@ -24,71 +26,72 @@
             <Chart :data="chartData" :target="target" />
           </div>
         </div>
-        <div v-else class="flex-1 overflow-auto">
-          <table class="w-100 table-auto">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody class="w-100">
-              <tr v-for="d in store.state.drank" :key="d.$key" class="w-100">
-                <td class="pl-4 py-4">
-                  <label class=" items-center space-x-2 flex">
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      class="clock w-4 h-4 opacity-75"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <span>
-                      <input
-                        class="bg-transparent "
-                        type="time"
-                        :value="intlDate(d.date)"
-                        required
-                        @change="handleTimeChange($event, d)"
-                        pattern="[0-9]{2}:[0-9]{2}"
-                        min="00:00"
-                        max="23:59"
-                      />
-                    </span>
-                  </label>
-                </td>
-                <td class="pl-4 py-4">{{ d.amount }}</td>
-                <td class="px-4 w-12">
-                  <button @click="deleteEntry(d)">
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      class="trash w-6 h-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      ></path>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </transition>
+      </div>
+      <div class="h-full overflow-auto  md:w-auto md:flex-1">
+        <table class="w-100 table-auto">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="w-100">
+            <tr v-for="d in store.drank.value" :key="d.$key" class="w-100">
+              <td class="pl-4 py-4">
+                <label class=" items-center space-x-2 flex">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="clock w-4 h-4 opacity-75"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <span>
+                    <input
+                      class="bg-transparent "
+                      type="time"
+                      :value="intlDate(d.date)"
+                      required
+                      @change="handleTimeChange($event, d)"
+                      pattern="[0-9]{2}:[0-9]{2}"
+                      min="00:00"
+                      max="23:59"
+                    />
+                  </span>
+                </label>
+              </td>
+              <td class="pl-4 py-4">{{ d.amount }}</td>
+              <td class="px-4 w-12">
+                <button @click="deleteEntry(d)">
+                  <svg
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="trash w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    ></path>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- </transition> -->
     </div>
-    <DateChanger :value="store.state.date" @date-change="handleDateChange" />
+    <DateChanger :value="store.date.value" @date-change="handleDateChange" />
   </article>
 </template>
 <script lang="ts">
@@ -201,5 +204,12 @@ table th:first-child {
 }
 .view-button-fade-enter-from {
   transform: translate(0, -100%);
+}
+
+.data-canvas {
+  scroll-snap-type: y mandatory;
+}
+.data-canvas > div {
+  scroll-snap-align: start;
 }
 </style>

@@ -3,7 +3,7 @@
     class="px-4 pb-4 space-y-2 animated top-0 absolute w-screen bg-black"
     :class="{ overlay: overlay }"
   >
-    <section class="space-y-2 h-32 visible-footer">
+    <section class="space-y-2 h-32 visible-footer transform transition-transform duration-200 ease-out" :class="{'translate-y-full': !store.isToday.value}">
       <div class="flex justify-center">
         <button
           @click="overlay = !overlay"
@@ -52,12 +52,14 @@
 import { defineComponent, ref } from "vue";
 import DrinkButton from "@/components/DrinkButton.vue";
 import DraggableTile from "@/components/DraggableTile.vue";
+import { useStore } from '@/store';
 export default defineComponent({
   components: {
     DrinkButton,
     DraggableTile,
   },
   setup(_, { emit }) {
+    const store = useStore()
     const overlay = ref(false);
     const values = ref(Array.from({ length: 12 }, (_, i) => (1 + i) / 10));
 
@@ -93,6 +95,7 @@ export default defineComponent({
       handleClick,
       overlay,
       handleDragEnd,
+      store
     };
   },
 });
@@ -100,7 +103,7 @@ export default defineComponent({
 <style scoped>
 footer {
   will-change: transform;
-  transform: translate(0, calc(100vh - 8rem));
+  transform: translate(0, calc((var(--vh, 1vh) * 100) - 8rem));
   height: 66vh;
   transition: transform 0.3s ease-in;
 }

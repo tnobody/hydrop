@@ -54,10 +54,12 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     // const date = ref(new Date(props.value).toISOString().substr(0, 10));
-    const date = computed(() =>
-      new Date(props.value).toISOString().substr(0, 10)
-    );
+    const date = computed(() => {
+      const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+      return new Date(props.value - tzoffset).toISOString().substr(0, 10);
+    });
     const hasNextDay = computed(() => isToday(props.value));
+
     function addDay(offset: number) {
       emit("date-change", getTime(addDays(props.value, offset)));
     }
